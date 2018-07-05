@@ -63,10 +63,23 @@ public class ElasticsearchCURD {
     public void addMapping(String index, String type) {
         try {
             // 使用XContentBuilder创建Mapping
-            XContentBuilder builder = XContentFactory.jsonBuilder().startObject().field("properties").startObject()
-                    .field("name").startObject().field("index", "not_analyzed").field("type", "string").endObject()
-                    .field("age").startObject().field("index", "not_analyzed").field("type", "integer").endObject()
-                    .endObject().endObject();
+            XContentBuilder builder = XContentFactory
+                    .jsonBuilder()
+                    .startObject()
+                        .field("properties")
+                            .startObject()
+                                .field("name")
+                                    .startObject()
+                                        .field("index", "not_analyzed")
+                                        .field("type", "string")
+                                    .endObject()
+                                .field("age")
+                                    .startObject()
+                                        .field("index", "not_analyzed")
+                                        .field("type", "integer")
+                                    .endObject()
+                            .endObject()
+                    .endObject();
             System.out.println(builder.string());
             PutMappingRequest mappingRequest = Requests.putMappingRequest(index).source(builder).type(type);
             this.client.admin().indices().putMapping(mappingRequest).actionGet();
@@ -96,8 +109,12 @@ public class ElasticsearchCURD {
     public void createDoc(String index, String type, String id) {
         try {
             // 使用XContentBuilder创建一个doc source
-            XContentBuilder builder = XContentFactory.jsonBuilder().startObject().field("name", "zhangsan")
-                    .field("age", 12).endObject();
+            XContentBuilder builder = XContentFactory
+                    .jsonBuilder()
+                        .startObject()
+                            .field("name", "zhangsan")
+                            .field("age", 12)
+                        .endObject();
             IndexResponse indexResponse = this.client.prepareIndex().setIndex(index).setType(type).setId(id)
                     .setSource(builder.string()).get();
              System.out.println(indexResponse.status());
@@ -117,8 +134,12 @@ public class ElasticsearchCURD {
     public void createDoc2(String index, String type) {
         try {
             // 使用XContentBuilder创建一个doc source
-            XContentBuilder builder = XContentFactory.jsonBuilder().startObject().field("name", "zhangsan")
-                    .field("age", 12).endObject();
+            XContentBuilder builder = XContentFactory
+                    .jsonBuilder()
+                        .startObject()
+                            .field("name", "zhangsan")
+                            .field("age", 12)
+                        .endObject();
             IndexResponse indexResponse = this.client.prepareIndex().setIndex(index).setType(type) // 如果没有设置id，则ES会自动生成一个id
                     .setSource(builder.string()).get();
             System.out.println(indexResponse.status());
@@ -138,8 +159,12 @@ public class ElasticsearchCURD {
      */
     public void updateDoc(String index, String type, String id) {
         try {
-            XContentBuilder builder = XContentFactory.jsonBuilder().startObject().field("name", "lisi").field("age", 12)
-                    .endObject();
+            XContentBuilder builder = XContentFactory
+                    .jsonBuilder()
+                        .startObject()
+                            .field("name", "lisi")
+                            .field("age", 12)
+                        .endObject();
             UpdateResponse updateResponse = this.client.prepareUpdate().setIndex(index).setType(type).setId(id)
                     .setDoc(builder.string()).get();
              System.out.println(updateResponse.status()); // true表示成功
