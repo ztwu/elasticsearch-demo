@@ -20,7 +20,9 @@ public class JavaApiElasticsearchTest {
 //        elasticsearchCURD.addMapping("test_java_api","test_type");
 //        elasticsearchCURD.createDoc("test_java_api","test_type","1");
 //        elasticsearchCURD.createDoc2("test_java_api","test_type");
-        elasticsearchCURD.updateDoc("test_java_api","test_type","1");
+//        elasticsearchCURD.updateDoc("test_java_api","test_type","1");
+//        System.out.println(elasticsearchCURD.get("test_java_api","test_type","1"));
+        elasticsearchCURD.min("test_java_api","test_type");
 
     }
 }
