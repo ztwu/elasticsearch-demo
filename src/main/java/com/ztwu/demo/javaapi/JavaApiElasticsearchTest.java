@@ -21,8 +21,8 @@ public class JavaApiElasticsearchTest {
 //        elasticsearchCURD.createDoc("test_java_api","test_type","1");
 //        elasticsearchCURD.createDoc2("test_java_api","test_type");
 //        elasticsearchCURD.updateDoc("test_java_api","test_type","1");
-//        System.out.println(elasticsearchCURD.get("test_java_api","test_type","1"));
-        elasticsearchCURD.min("test_java_api","test_type");
+        System.out.println(elasticsearchCURD.get("edmp_bigdata_exam_subject_report","dm_standard_report_union_exam_subject","KgSX2WQBJaVaXotg_aJw"));
+//        elasticsearchCURD.min("test_java_api","test_type");
 
     }
 }

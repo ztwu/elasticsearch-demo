@@ -3,7 +3,7 @@ package com.ztwu.demo.javaapi;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.Settings;
-import org.elasticsearch.common.transport.InetSocketTransportAddress;
+import org.elasticsearch.common.transport.TransportAddress;
 import org.elasticsearch.transport.client.PreBuiltTransportClient;
 
 import java.net.InetAddress;
@@ -25,12 +25,11 @@ public class ClientFactory {
         try {
             //设置集群名称(配置信息)
             Settings settings = Settings.builder()
-                    .put("cluster.name", "ztwu_cluster")
+                    .put("cluster.name", "edmp_bigdata_cluster")
                     .build();
             //创建client(添加连接地址)
             transportClient = new PreBuiltTransportClient(settings)
-                    .addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName("192.168.1.101"), 9300))
-                    .addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName("192.168.1.102"), 9300));
+                    .addTransportAddress(new TransportAddress(InetAddress.getByName("*.*.*.*"), 9300));
         } catch (Exception e) {
             e.printStackTrace();
         }
